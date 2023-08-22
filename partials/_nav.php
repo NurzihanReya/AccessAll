@@ -48,7 +48,12 @@ if($loggedin){
     {
       echo'<li class="nav-item active">
       <a class="nav-link" href="userhome.php">Home<span class="sr-only">(current)</span></a>
-      </li>';
+      </li>
+      
+      <form class="form-inline mx-3 my-2 my-lg-0" method="get" action="search.php">
+    <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+    </form>';
     }
     
 

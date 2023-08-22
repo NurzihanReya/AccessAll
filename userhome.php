@@ -32,7 +32,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
 
 
     <div class="container mt-5">
-        <h3>Browse Categories:</h3>
+        <h3>Browse Services:</h3>
         <div class="row">
             <?php
             $sql = "SELECT services.*, organizations.name AS organization_name FROM services
