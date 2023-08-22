@@ -1,6 +1,5 @@
 <?php
-session_start(); //Every page that will use the session information on the website must be identified by the session_start() function. This initiates a session on each PHP page. The session_start function must be the first thing sent to the browser or it won't work properly. 
-
+session_start(); 
 if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
     header("location: login.php");
     exit;
@@ -26,9 +25,6 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
     <?php include 'partials/_dbconnect.php'; ?>
     <?php include 'partials/_nav.php'; ?>
 
-
-
-    <!-- SEARCH REASULT -->
 
     <div class="container my-3">
         <h2 class="py-2">Search Results for <em>"<?php echo $_GET['search']?>"</em></h2>
@@ -56,7 +52,6 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
                 $s_id= $row['s_id'];
                 $url = "servicedetails.php?sid=". $s_id;
 
-            // Display the search result
             
             echo '<div class="result">
             <img src="' . $image_url . '" class="card-img-top" alt="' . $service_name . ' Image" style="max-height: 200px; object-fit: cover;">

@@ -6,7 +6,6 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
 }
 ?>
 
-
 <!doctype html>
 <html lang="en">
 
@@ -32,10 +31,6 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
     <?php
     $service_id = $_GET['sid'];
 
-
-
-
-    
     $sql = "SELECT services.*, organizations.name AS organization_name FROM services
     JOIN organizations ON services.o_id = organizations.o_id";
 $result = mysqli_query($conn, $sql);

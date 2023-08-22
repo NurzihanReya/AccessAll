@@ -46,45 +46,6 @@ $showError = false;
             $showError = "An error occurred while processing your request.";
         }
     }    
-
-    // $images= addslashes(file_get_contents($_FILES["images"]["tmp_name"]));
-
-    //check for duplicate user
-//     $result = $db->query("SELECT * FROM `users` WHERE useremail = '$useremail'");
-// $row = $result->fetch_row();
-// echo '#: ', $row[0];
-
-    // $existSql = "SELECT count(*) FROM `users` WHERE useremail = '$useremail'";
-    // echo $existSql;
-    // $result = mysqli_query($conn, $existSql);
-    // $row = $result->fetch_row();
-    // echo $row;
-    // $numExistRows = $row[0];
-    // echo $numExistRows;
-    // if($numExistRows > 0)
-    // {
-    //     $exists=true;
-    //     $showError = "email already exists. If you already have an account, please visit the Login page.";
-    // }
-    // else
-    // {
-    //     //$exists = false;
-    //     if($password == $cpassword){
-    //         $sql = "INSERT INTO `users` (`name`, `useremail`, `password`, `user_type_id`, `dt`) VALUES ($name, $useremail, $password, $usertype, current_timestamp())";
-    //         echo $sql;
-    //         $result = mysqli_query($conn, $sql);
-    //         echo $result;
-    //         if ($result)
-    //         {
-    //             $showAlert = true;
-    //         }
-    //     }
-    //     else
-    //     {
-    //         $showError = "Passwords do not match.";
-    //     }
-    // }
-    //When a user submits the data by clicking on "Submit", the form data is sent to the file specified in the action attribute of the <form> tag.
 }
     
 ?>
