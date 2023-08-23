@@ -49,11 +49,12 @@ if($loggedin){
       echo'<li class="nav-item active">
       <a class="nav-link" href="userhome.php">Home<span class="sr-only">(current)</span></a>
       </li>
-      
+
       <form class="form-inline mx-3 my-2 my-lg-0" method="get" action="search.php">
     <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
     <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
-    </form>';
+    </form>
+      ';
     }
     
 
@@ -61,6 +62,9 @@ if($loggedin){
       
   </ul>
   </div>
+
+
+  
 
   <div class="">
     <ul class="navbar-nav mr-auto ">
@@ -81,3 +85,41 @@ if($loggedin){
 
 
 ?>
+<!-- <a class="nav-link" href="profile.php"><i>'. $_SESSION['name']. '</i></a> 
+
+<a class="btn btn-success btn-lg" href="#" role="button">Learn more</a>
+
+<p class="text-light my-2 mx-2"> <i>'. $_SESSION['name']. '</i></p>
+
+
+<li class="nav-item active">
+      <a class="nav-link" href="notification.php">Notification<span class="sr-only">(current)</span></a>
+      </li>
+    
+    
+    
+       <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Top Categories
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">';
+
+    $sql = "select cat.category_id, cat.category_name, temp.th_count
+            from categories as cat
+            RIGHT join (
+              select c.category_id as cat_id, count(*) as th_count
+              from categories as c
+              join threads th on th.thread_cat_id = c.category_id
+                WHERE th.status = 1
+              group by c.category_id
+              order by th_count desc limit 3
+            ) as temp on temp.cat_id = cat.category_id;";
+    $result = mysqli_query($conn, $sql); 
+    
+    while($row = mysqli_fetch_assoc($result))
+    {
+      echo '<a class="dropdown-item" href="threadlist.php?catid='. $row['category_id']. '">' . $row['category_name']. '</a> '; 
+      
+    }
+          
+    echo'</li>-->

@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
     header("location: index.php");
     exit;
@@ -9,17 +8,13 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
 ?>
 
 
-
-
 <!doctype html>
 <html lang="en">
-
 
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -27,27 +22,39 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
     <title>AccessAll</title>
 </head>
 
-
 <body>
     <?php include 'partials/_dbconnect.php'; ?>
     <?php include 'partials/_nav.php'; ?>
 
-
     <div class="container mt-5">
-        <h3>Your Organizations:</h3>
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h3>Your Organizations:</h3>
+            <?php
+            $org_id = $_SESSION['sno'];
+            echo '<a href="view_appointments.php?org_id=' . $org_id . '" class="btn btn-primary">View All Appointments</a>';
+            ?>
+        </div>
+
+
+
+        <div class="col-md-4 mb-4">
+            <a href="createorg.php" class="btn btn-dark btn-block">Add New Service</a>
+        </div>
+
+
+
+
         <div class="row">
             <?php
             $org_id = $_SESSION['sno'];
-
 
             $sql = "SELECT * FROM services WHERE o_id = '$org_id'";
             $result = mysqli_query($conn, $sql);
             $noResult = true;
 
-
             if ($result) {
                 $count = 0;
-
 
                 while ($row = mysqli_fetch_assoc($result)) {
                     $service_id = $row['s_id'];
@@ -55,11 +62,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
                     $description = $row['description'];
                     $image_url = $row['image_url'];
 
-
-       
-                    $truncated_description = substr($description, 0, 100);
-                 
-
+        
+                    $truncated_description = substr($description, 0, 100); 
+                  
 
  
     echo '
@@ -68,32 +73,29 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
             <img src="' . $image_url . '" class="card-img-top" alt="' . $service_name . ' Image" style="max-height: 200px; object-fit: cover;">
             <div class="card-body">
                 <h5 class="card-title">' . $service_name . '</h5>
-                <p class="card-text">' . $truncated_description . '... <a href="orgdetails.php?orgid=' . $service_id . '">Read More</a></p>
-                <a href="orgdetails.php?orgid=' . $service_id . '" class="btn btn-dark btn-block">Edit Service</a>
+                <p class="card-text">' . $truncated_description . '... <a href="servicedetails.php?sid=' . $service_id . '">Read More</a></p>
+                <a href="servicedetails_org.php?sid=' . $service_id . '"  class="btn btn-dark btn-block">View Organization</a> 
             </div>
         </div>
-    </div>';
-
-
-
+    </div>
+    
+    </div>'
+    
+    ; //to do: edit organization
 
 
 
                     $count++;
 
-
                     if ($count % 3 === 0) {
                         echo '</div><div class="row">';
                     }
-
 
                     $noResult = false;
                 }
             }
 
-
             mysqli_close($conn);
-
 
             if ($noResult) {
                 echo '
@@ -110,7 +112,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
     </div>
 
 
-
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
     </script>
@@ -121,6 +122,5 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
 </body>
-
 
 </html>

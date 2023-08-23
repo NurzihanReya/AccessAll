@@ -50,7 +50,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
                 $organization_name = $row['organization_name'];
                 $image_url = $row['image_url'];
                 $s_id= $row['s_id'];
-                $url = "servicedetails.php?sid=". $s_id;
+                $url = "servicedetails_user.php?sid=". $s_id;
 
             
             echo '<div class="result">

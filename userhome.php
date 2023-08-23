@@ -32,7 +32,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
 
 
     <div class="container mt-5">
-        <h3>Browse Services:</h3>
+        <h3>Browse Categories:</h3>
         <div class="row">
             <?php
             $sql = "SELECT services.*, organizations.name AS organization_name FROM services
@@ -59,28 +59,26 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
                         <img src="' . $image_url . '" class="card-img-top" alt="' . $service_name . ' Image" style="max-height: 200px; object-fit: cover;">
                         <div class="card-body">
                             <h5 class="card-title">' . $service_name . '</h5>
-                            <p class="card-text"><span class="text">Organization: <i>' . $organization_name . '</i></span></p>
-
-            <p class="card-text">' . $truncated_description . '... <a
-                    href="servicedetails.php?sid=' . $service_id . '">Read More</a></p>
-            <a href="servicedetails.php?sid=' . $service_id . '" class="btn btn-dark btn-block">View Service</a>
-        </div>
-    </div>
-    </div>';
-    }
+                            <p class="card-text"><span class="text-primary">' . $organization_name . '</span></p>
+                            <p class="card-text">' . $truncated_description . '... <a href="servicedetails.php?sid=' . $service_id . '">Read More</a></p>
+                            <a href="servicedetails_user.php?sid=' . $service_id . '" class="btn btn-primary btn-block">View Organization</a>
+                        </div>
+                    </div>
+                </div>';
+            }
 
 
-    if ($noResult) {
-    echo '
-    <div class="jumbotron">
-        <h1 class="display-4">No services available</h1>
-        <p class="lead">There are currently no services to display.</p>
-    </div>';
-    }
+            if ($noResult) {
+                echo '
+                <div class="jumbotron">
+                    <h1 class="display-4">No services available</h1>
+                    <p class="lead">There are currently no services to display.</p>
+                </div>';
+            }
 
 
-    mysqli_close($conn);
-    ?>
+            mysqli_close($conn);
+            ?>
         </div>
     </div>
 
