@@ -7,32 +7,36 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 }
 
 include 'partials/_dbconnect.php';
+$username=$_SESSION['name'];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = $_POST["name"];
-    $bin = $_POST["bin"];
+    
+    // $name = $_POST["name"];
+    // $bin = $_POST["bin"];
     $address = $_POST["inputAddress"];
     $city = $_POST["inputCity"];
     $phone_number = $_POST["inputZip"];
-    $service_type = $_POST["inputServiceType"];
+    // $service_type = $_POST["inputServiceType"];
     $payment_method = $_POST["inputPaymentMethod"];
-    $transaction_number = $_POST["transaction"];
-    $user_id = $_SESSION['sno'];
+    // $transaction_number = $_POST["transaction"];
+    // $user_id = $_SESSION['sno'];
 
-    $sql = "INSERT INTO organizations (name, bin, address, city, phone_number, service_type, payment_method, transaction_number, user_id, status) 
-            VALUES ('$name', '$bin', '$address', '$city', '$phone_number', '$service_type', '$payment_method', '$transaction_number', '$user_id', 0)";
-    $result = mysqli_query($conn, $sql);
-    $showAlert = true;
-    if($showAlert){
-        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>Success!</strong> Your service request has been successful! Please wait for admin to approve.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-            </div>';
-        } else {
-            echo "Error: " . mysqli_error($conn);
-        }
+    $sql = "UPDATE organizations 
+    SET address='$address',city='$city',
+    phone_number='$phone_number',payment_method='$payment_method', 
+    WHERE name='$username'";
+
+    if (mysqli_query($conn, $sql)) {
+        echo '
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Organization created successfully!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>';
+    } else {
+        echo "Error: " . mysqli_error($conn);
+    }
 }
 ?>
 
@@ -45,13 +49,72 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-
     <title>AccessAll</title>
+    <style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .container {
+        margin-top: 20px;
+    }
+
+    .card {
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    .card-text {
+        font-size: 18px;
+        line-height: 1.5;
+    }
+
+    .form-label {
+        font-weight: bold;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+
+    .card-header {
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #dee2e6;
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .mt-3 {
+        margin-top: 20px;
+    }
+
+    @media (max-width: 768px) {
+        .col-md-8 {
+            margin-bottom: 20px;
+        }
+    }
+    </style>
+
+    </style>
 </head>
 
 
@@ -68,11 +131,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="name">Name of the Service</label>
-                    <input type="text" class="form-control" id="name" name="name">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="<?php echo $username;?>"
+                        readonly>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="bin">Business Identification Number</label>
-                    <input type="text" class="form-control" id="bin" name="bin">
+                    <input type="text" class="form-control" id="bin" name="bin" readonly>
                 </div>
             </div>
             <div class="form-group">
@@ -90,7 +154,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <input type="text" class="form-control" id="inputZip" name="inputZip">
                 </div>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="inputState">Type of Service</label>
                 <select id="inputState" class="form-control" name="inputServiceType">
                     <option selected>Choose...</option>
@@ -98,7 +162,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <option value='fire'>Fire Service</option>
                     <option value='police'>Police Station</option>
                 </select>
-            </div>
+            </div> -->
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputState">Payment Method</label>
@@ -109,10 +173,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <option value='rocket'>Rocket</option>
                     </select>
                 </div>
-                <div class="form-group col-md-6">
+                <!-- <div class="form-group col-md-6">
                     <label for="transaction">Transaction Number</label>
                     <input type="text" class="form-control" id="transaction" name="transaction">
-                </div>
+                </div> -->
             </div>
             <div class="form-group">
                 <div class="form-check">

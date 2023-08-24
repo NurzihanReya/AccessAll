@@ -20,7 +20,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>AccessAll - Service Details</title>
     <style>
-    body {
+    <style>body {
         background-color: #f8f9fa;
     }
 
@@ -107,10 +107,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
                             $description = $row['description'];
                             $image_url = $row['image_url'];
                             $organization_name = $row['organization_name'];
-                            $phone_number = $row['phone_number'];
+                            $bin = $row['organization_name'];
+                            $phone_number = $row['bin'];
                             $address = $row['address'];
                             $city = $row['city'];
-                            
+                            $payment_method = $row['payment_method'];
+                            $transaction_id = $row['transaction_number'];
 
                             // Display service details
                             echo '<div class="card mb-4">';
@@ -138,38 +140,20 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
                     <div class="card-header">Organization Details</div>
                     <div class="card-body">
                         <p><span class="form-label">Organization Name:</span> <?php echo $organization_name; ?></p>
+                        <p><span class="form-label">Business Identification Number:</span> <?php echo $bin; ?></p>
                         <p><span class="form-label">Phone Number:</span> <?php echo $phone_number; ?></p>
                         <p><span class="form-label">Address:</span> <?php echo $address; ?></p>
                         <p><span class="form-label">City:</span> <?php echo $city; ?></p>
+                        <p><span class="form-label">Payment Method:</span> <?php echo $payment_method; ?></p>
+                        <p><span class="form-label">transaction Number:</span> <?php echo $transaction_id; ?></p>
                     </div>
+                    <button type="submit" class="btn btn-primary btn-block">Approve</button>
+                    <button type="submit" class="btn btn-primary btn-block">Reject</button>
                 </div>
-                <div class="card mt-3">
+                <!-- <div class="card mt-3">
                     <div class="card-header">Take an Appointment</div>
                     <div class="card-body">
                         <form action="submit_appointment.php" method="post">
-                            <?php if($service_name=='Hospital' || $service_name=='hospital' ){ ?>
-                            <div class="form-group">
-                                <label for="doctor_name" class="form-label">Doctor Name:</label>
-                                <input type="text" class="form-control" id="doctor_name" name="extra" required>
-                                <label for="symptomps" class="form-label">Provide Symptomps:</label>
-                                <input type="textarea" class="form-control" id="symptomps" name="extra" required>
-                            </div>
-                            <?php }?>
-                            <?php if($service_name=='Police Station'){ ?>
-                            <div class="form-group">
-                                <label for="crime_report" class="form-label">Crime Description:</label>
-                                <input type="text" class="form-control" id="crime_report" name="extra" required>
-                            </div>
-                            <?php }?>
-                            <?php if($service_name=='Fire Service'){ ?>
-                            <div class="form-group">
-                                <label for="fire_report" class="form-label">Fire Area:</label>
-                                <input type="text" class="form-control" id="fire_report" name="extra" required>
-                                <label for="fire_radius" class="form-label">Provide an estimated radius of the
-                                    fire:</label>
-                                <input type="textarea" class="form-control" id="fire_radius" name="extra" required>
-                            </div>
-                            <?php }?>
                             <div class="form-group">
                                 <label for="phone_number" class="form-label">Phone Number:</label>
                                 <input type="tel" class="form-control" id="phone_number" name="phone_number" required>
@@ -185,20 +169,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
                                     required>
                             </div>
                             <input type="hidden" name="service_id" value="<?php echo $service_id; ?>">
-                            <button type="submit" class="btn btn-primary btn-block">Book Appointment</button><br />
+                            <button type="submit" class="btn btn-primary btn-block">Book Appointment</button>
                         </form>
-                        <?php if($service_name=='Police Station'){ ?>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block">EMERGENCY DIRECT CONTACT</button>
-                        </div>
-                        <?php }?>
-                        <?php if($service_name=='Fire Service'){ ?>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block">EMERGENCY DIRECT CONTACT</button>
-                        </div>
-                        <?php }?>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

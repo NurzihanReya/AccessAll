@@ -57,6 +57,11 @@ exit;
             </div>
         </div>
     </div>
+    <div>
+
+        <a href="edit_service.php" class="btn btn-dark btn-block">Edit Your Service</a>
+    </div>
+
 
 
     <!-- <div style="width: 1500px;"> -->
@@ -72,5 +77,6 @@ exit;
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
 </body>
+
 
 </html>

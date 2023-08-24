@@ -97,6 +97,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
                     echo '<p><strong>Service Name:</strong> ' . $row['service_name'] . '</p>';
                     echo '<p><strong>Appointment Date:</strong> ' . $row['appointment_date'] . '</p>';
                     echo '<p><strong>Appointment Time:</strong> ' . $row['appointment_time'] . '</p>';
+                    echo '<p><strong>Extra Information:</strong> ' . $row['extra'] . '</p>';
                     echo '</div>';
 
                     echo '<div class="user-details">';

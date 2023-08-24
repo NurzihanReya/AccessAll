@@ -19,14 +19,16 @@ if ($result && mysqli_num_rows($result) > 0) {
     $user_id = $row['id'];
 
 
+
     $phone_number = $_POST['phone_number'];
     $appointment_date = $_POST['appointment_date'];
     $appointment_time = $_POST['appointment_time'];
     $service_id = $_POST['service_id'];              //to do: handle duplicates
+    $extra = $_POST['extra'];
 
     
-    $sql = "INSERT INTO appointments (user_id, service_id, phone_number, appointment_date, appointment_time)
-            VALUES ('$user_id', '$service_id', '$phone_number', '$appointment_date', '$appointment_time')";
+    $sql = "INSERT INTO appointments (user_id, service_id, phone_number, appointment_date, appointment_time, extra)
+            VALUES ('$user_id', '$service_id', '$phone_number', '$appointment_date', '$appointment_time', '$extra')";
     $result = mysqli_query($conn, $sql);
 
     if ($result) {

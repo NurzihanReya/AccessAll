@@ -72,6 +72,7 @@ include 'partials/_nav.php';
                       echo '<p><strong>Appointment Time:</strong> ' . $row['appointment_time'] . '</p>';
                       echo '<p><strong>User Name:</strong> ' . $row['user_name'] . '</p>';
                       echo '<p><strong>User Email:</strong> ' . $row['user_email'] . '</p>';
+                      echo '<p><strong>Extra Information:</strong> ' . $row['extra'] . '</p>';
                       echo '</div>';
                       echo '</div>';
                   }

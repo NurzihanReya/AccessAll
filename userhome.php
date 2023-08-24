@@ -42,30 +42,33 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
 
 
             while ($row = mysqli_fetch_assoc($result)) {
-                $noResult = false;
-                $service_id = $row['s_id'];
-                $service_name = $row['service_name'];
-                $description = $row['description'];
-                $organization_name = $row['organization_name'];
-                $image_url = $row['image_url'];
+                if($row['status'] == 1)
+                {
+                    $noResult = false;
+                    $service_id = $row['s_id'];
+                    $service_name = $row['service_name'];
+                    $description = $row['description'];
+                    $organization_name = $row['organization_name'];
+                    $image_url = $row['image_url'];
 
 
-                $truncated_description = substr($description, 0, 100);
+                    $truncated_description = substr($description, 0, 100);
 
 
-                echo '
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 shadow">
-                        <img src="' . $image_url . '" class="card-img-top" alt="' . $service_name . ' Image" style="max-height: 200px; object-fit: cover;">
-                        <div class="card-body">
-                            <h5 class="card-title">' . $service_name . '</h5>
-                            <p class="card-text"><span class="text-primary">' . $organization_name . '</span></p>
-                            <p class="card-text">' . $truncated_description . '... <a href="servicedetails.php?sid=' . $service_id . '">Read More</a></p>
-                            <a href="servicedetails_user.php?sid=' . $service_id . '" class="btn btn-primary btn-block">View Organization</a>
+                    echo '
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 shadow">
+                            <img src="' . $image_url . '" class="card-img-top" alt="' . $service_name . ' Image" style="max-height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title">' . $service_name . '</h5>
+                                <p class="card-text"><span class="text-primary">' . $organization_name . '</span></p>
+                                <p class="card-text">' . $truncated_description . '... <a href="servicedetails_user.php?sid=' . $service_id . '">Read More</a></p>
+                                <a href="servicedetails_user.php?sid=' . $service_id . '" class="btn btn-primary btn-block">View Organization</a>
+                            </div>
                         </div>
-                    </div>
-                </div>';
+                    </div>';
             }
+                }
 
 
             if ($noResult) {

@@ -27,6 +27,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         {
             header("location: organizationhome.php");
         }
+        else if($_SESSION['user_type_id'] == 0)
+        {
+            header("location: adminhome.php");
+        }
         else
         {
             header("location: userhome.php");
