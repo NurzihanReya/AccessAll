@@ -28,22 +28,15 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
 
     <div class="container mt-5">
 
-        <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="d-flex justify-content-between mb-3">
             <h3>Your Organizations:</h3>
             <?php
             $org_id = $_SESSION['sno'];
-            echo '<a href="view_appointments.php?org_id=' . $org_id . '" class="btn btn-primary">View All Appointments</a>';
+            echo '<a href="view_appointments.php?org_id=' . $org_id . '" class="btn btn-primary">View All Appointments</a>
+            <br>
+            <a href="createorg.php" class="class="btn btn-primary">Add New Service</a>';
             ?>
         </div>
-
-
-
-        <div class="col-md-4 mb-4">
-            <a href="createorg.php" class="btn btn-dark btn-block">Add New Service</a>
-        </div>
-
-
-
 
         <div class="row">
             <?php
@@ -83,6 +76,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
     
     ; //to do: edit organization
 
+    
 
 
                     $count++;

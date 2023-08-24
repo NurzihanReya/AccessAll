@@ -35,7 +35,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
         <h3>Browse Categories:</h3>
         <div class="row">
             <?php
-            $sql = "SELECT services.*, organizations.name AS organization_name FROM services
+            $sql = "SELECT services.*, organizations.name AS organization_name, organizations.status AS status FROM services
                     JOIN organizations ON services.o_id = organizations.o_id";
             $result = mysqli_query($conn, $sql);
             $noResult = true;
@@ -60,8 +60,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
                         <div class="card h-100 shadow">
                             <img src="' . $image_url . '" class="card-img-top" alt="' . $service_name . ' Image" style="max-height: 200px; object-fit: cover;">
                             <div class="card-body">
-                                <h5 class="card-title">' . $service_name . '</h5>
-                                <p class="card-text"><span class="text-primary">' . $organization_name . '</span></p>
+                                <h5 class="card-title">' . $organization_name . '</h5>
+                                <p class="card-text"><span class="text-primary">' . $service_name . '</span></p>
                                 <p class="card-text">' . $truncated_description . '... <a href="servicedetails_user.php?sid=' . $service_id . '">Read More</a></p>
                                 <a href="servicedetails_user.php?sid=' . $service_id . '" class="btn btn-primary btn-block">View Organization</a>
                             </div>

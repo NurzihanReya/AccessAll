@@ -32,7 +32,8 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
         <?php
         $noresult = true;
         $query = $_GET["search"];
-        $sql = "SELECT services.*, organizations.name AS organization_name FROM services
+        $sql = "SELECT services.*, organizations.name AS organization_name, organizations.phone_number AS phone_number, organizations.address AS address, organizations.city as city 
+        FROM services
         JOIN organizations ON services.o_id = organizations.o_id
         WHERE service_name LIKE '%$query%' OR description LIKE '%$query%'";
 
@@ -50,14 +51,22 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
                 $organization_name = $row['organization_name'];
                 $image_url = $row['image_url'];
                 $s_id= $row['s_id'];
+                $phone_number= $row['phone_number'];
+                $address= $row['address'];
+                $city= $row['city'];
                 $url = "servicedetails_user.php?sid=". $s_id;
+                $truncated_description = substr($description, 0, 120);
 
             
-            echo '<div class="result">
-            <img src="' . $image_url . '" class="card-img-top" alt="' . $service_name . ' Image" style="max-height: 200px; object-fit: cover;">
-                        <h4><i><a href="'.$url. '" class="text-dark">'. $organization_name. '</a> </i></h4>
-                        <p>'. $description .'</p>
-                  </div>'; 
+            echo '<div class="card">
+            <h5 class="card-header"><a href="servicedetails_user.php?sid=' . $service_id . '">'.$organization_name.' -  '.$service_name.' </a></h5>
+            <div class="card-body">
+                <p class="card-title"><b>Description: </b>'.$truncated_description.'... <a href="servicedetails_user.php?sid=' . $service_id . '">Read More</a></p>
+                <p class="card-text"><b>Phone Number: </b>'.$phone_number.'</p>
+                <p class="card-text"><b>Address: </b>'.$address.'</p>
+                <p class="card-text"><b>City: </b>'.$city.'</p>
+                <a href="servicedetails_user.php?sid=' . $service_id . '" class="btn btn-primary btn-block">Create Appointment</a>
+                <br>'; 
             }}
 
             if($noresult)

@@ -50,6 +50,10 @@ exit;
                 {
                     echo "<td>"; echo "User";  echo "</td>";
                 }
+                else if($_SESSION['user_type_id'] == 0)
+                {
+                    echo "<td>"; echo "Admin";  echo "</td>";
+                }
                 echo "</tr>";
                     ?>
 
@@ -58,8 +62,13 @@ exit;
         </div>
     </div>
     <div>
+        <?php
+    if($_SESSION['user_type_id'] == 1)
+                {
+                    echo'<a href="edit_service.php" class="btn btn-dark btn-block">Edit Your Service</a>';
+                }
+?>
 
-        <a href="edit_service.php" class="btn btn-dark btn-block">Edit Your Service</a>
     </div>
 
 
