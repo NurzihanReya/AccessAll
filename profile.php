@@ -63,9 +63,9 @@ exit;
     </div>
     <div>
         <?php
-    if($_SESSION['user_type_id'] == 1)
+    if($_SESSION['user_type_id'] == 0)
                 {
-                    echo'<a href="edit_service.php" class="btn btn-dark btn-block">Edit Your Service</a>';
+                    echo'<a href="alluser.php" class="btn btn-dark btn-block">View All Users</a>';
                 }
 ?>
 
