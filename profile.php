@@ -1,81 +1,120 @@
 <?php
-session_start(); //Every page that will use the session information on the website must be identified by the session_start() function. This initiates a session on each PHP page. The session_start function must be the first thing sent to the browser or it won't work properly. 
+session_start();
 
-if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true)
-{
-header("location: index.php");
-exit;
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
+    header("location: index.php");
+    exit;
 }
 ?>
+
 
 <!doctype html>
 <html lang="en">
 
+
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
     <title>Profile</title>
 </head>
 
-<body>
 
+<body>
     <?php include 'partials/_dbconnect.php'; ?>
     <?php include 'partials/_nav.php'; ?>
-    <div>
-        <div class="mx-auto mt-3" style="width: 1200px;">
-            <div class="container-fluid  mx-1 my-2">
-                <h4>User Information</h4>
-                <table class="table table-bordered">
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                    </tr>
-
-                    <?php
-                echo "<tr>";
-                echo "<td>"; echo $_SESSION['name'] ; echo "</td>";
-                echo "<td>"; echo $_SESSION['useremail'];  echo "</td>";
-                if($_SESSION['user_type_id'] == 1)
-                {
-                    echo "<td>"; echo "Organization";  echo "</td>";   
-                }
-                else if($_SESSION['user_type_id'] == 2)
-                {
-                    echo "<td>"; echo "User";  echo "</td>";
-                }
-                else if($_SESSION['user_type_id'] == 0)
-                {
-                    echo "<td>"; echo "Admin";  echo "</td>";
-                }
-                echo "</tr>";
-                    ?>
 
 
+    <div class="container my-4">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4>User Information</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>Name</th>
+                                <td><?php echo $_SESSION['name']; ?></td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td><?php echo $_SESSION['useremail']; ?></td>
+                            </tr>
+                            <tr>
+                                <th>Role</th>
+                                <td>
+                                    <?php
+                                    if ($_SESSION['user_type_id'] == 1) {
+                                        echo "Organization";
+                                    } else if ($_SESSION['user_type_id'] == 2) {
+                                        echo "User";
+                                    } else if ($_SESSION['user_type_id'] == 0) {
+                                        echo "Admin";
+                                    }
+                                    ?>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4>Appointments</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Service Name</th>
+                                    <th>Appointment Date</th>
+                                    <th>Appointment Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $sql = "SELECT * FROM appointments INNER JOIN services ON services.s_id=appointments.service_id WHERE user_id=$_SESSION[sno]";
+                                $result = mysqli_query($conn, $sql);
+                                $appointments = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+
+                                foreach ($appointments as $appointment) {
+                                    echo "<tr>";
+                                    echo "<td>" . $appointment['service_name'] . "</td>";
+                                    echo "<td>" . $appointment['appointment_date'] . "</td>";
+                                    echo "<td>" . $appointment['appointment_time'] . "</td>";
+                                    echo "</tr>";
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-4">
+
+                <?php
+                        if ($_SESSION['user_type_id'] == 0) {
+                            echo '<a href="alluser.php" class="btn btn-dark btn-block mb-2">View All Users</a>';
+                        }
+                        if ($_SESSION['user_type_id'] == 1) {
+                            echo '<a href="edit_service.php" class="btn btn-dark btn-block mb-2">Edit Your Service</a>';
+                        }
+                        ?>
             </div>
         </div>
     </div>
-    <div>
-        <?php
-    if($_SESSION['user_type_id'] == 0)
-                {
-                    echo'<a href="alluser.php" class="btn btn-dark btn-block">View All Users</a>';
-                }
-?>
-
+    </div>
     </div>
 
 
-
-    <!-- <div style="width: 1500px;"> -->
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
     </script>

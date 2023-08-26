@@ -8,6 +8,6 @@ $sql2 = mysqli_query($conn,$sql);
 
 <?php
 echo("<script LANGUAGE='JavaScript'>
-        window.alert('Post has been approved successfully!'); window.location.href = 'http://localhost/accessall/adminhome.php';
+        window.alert('Post has been approved successfully!'); window.location.href = 'http://localhost/SmartSociety/adminhome.php';
 </script>");
 ?>

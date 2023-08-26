@@ -10,7 +10,7 @@ else{
 if(!$loggedin){
   echo'
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand">AccessAll</a>
+  <a class="navbar-brand">SmartSociety</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button> 
@@ -30,12 +30,14 @@ if(!$loggedin){
 if($loggedin){
   echo'
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand text-white">AccessAll</a>
+  <a class="navbar-brand text-white">SmartSociety</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button> 
   <div class="collapse navbar-collapse mr-auto justify-content-between" id="navbarSupportedContent" >
   
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
   <div class="">
     <ul class="navbar-nav mr-auto ">';
     if($_SESSION['user_type_id'] == 1)
@@ -72,6 +74,10 @@ if($loggedin){
 
   <div class="">
     <ul class="navbar-nav mr-auto ">
+
+    <li class="nav-item active float-right">
+    <a class="fa fa-bell" href="notifications.php"><i></i></a> 
+    </li>
     
     <li class="nav-item active float-right">
     <a class="nav-link" href="profile.php"><i>'. $_SESSION['name']. '</i></a> 

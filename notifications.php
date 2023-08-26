@@ -16,7 +16,7 @@ include 'partials/_nav.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Appointments for Organization</title>
+    <title>Notifications</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <style>
     body {
@@ -49,40 +49,30 @@ include 'partials/_nav.php';
 
 <body>
     <div class="container">
-        <h2 class="text-center">Appointments for Organization</h2>
+        <h2 class="text-center">Notifications</h2>
 
         <?php
-          
-          if (isset($_GET['org_id'])) {
-              $org_id = $_GET['org_id'];
   
-              $sql = "SELECT appointments.*, services.service_name, users.name AS user_name, users.useremail AS user_email
-                      FROM appointments
-                      JOIN services ON appointments.service_id = services.s_id
-                      JOIN users ON appointments.user_id = users.id
-                      WHERE services.o_id = $org_id";
-              $result = mysqli_query($conn, $sql);
+        $sql = "SELECT * FROM reports INNER JOIN services ON reports.s_id=services.s_id WHERE reports.flag=1";
+        $result = mysqli_query($conn, $sql);
+
+        //$reports=mysqli_fetch_all($result,MYSQLI_ASSOC);
   
               if ($result && mysqli_num_rows($result) > 0) {
                   while ($row = mysqli_fetch_assoc($result)) {
                       echo '<div class="card mb-3">';
                       echo '<div class="card-header">' . $row['service_name'] . '</div>';
                       echo '<div class="card-body">';
-                      echo '<p><strong>Appointment Date:</strong> ' . $row['appointment_date'] . '</p>';
-                      echo '<p><strong>Appointment Time:</strong> ' . $row['appointment_time'] . '</p>';
-                      echo '<p><strong>User Name:</strong> ' . $row['user_name'] . '</p>';
-                      echo '<p><strong>User Email:</strong> ' . $row['user_email'] . '</p>';
-                      echo '<p><strong>Extra Information:</strong> ' . $row['extra'] . '</p>';
+                      echo '<p>There has been a report of <strong>' . $row['type'] . '</strong> at <strong>'.$row['r_time'].'</strong></p>';
+                      echo '<p>Reported By: ' . $row['u_id'] . '</p>';
                       echo '</div>';
                       echo '</div>';
                   }
               } else {
-                  echo '<center><p class="text-danger">No appointments found for this organization.</p><center>';
+                  echo '<center><p class="text-danger">No new notifications</p>';
               }
-          } else {
-              echo '<p class="text-danger">Invalid organization ID.</p>';
-          }
-  
+        $sql = "UPDATE reports SET flag=0 WHERE flag=1";
+        $result = mysqli_query($conn, $sql);
           mysqli_close($conn);
           ?>
 

@@ -131,7 +131,7 @@ $showError = false;
     ?>
 
     <div class="container my-4">
-        <h2 class="text-center">Signup to AccessAll</h2>
+        <h2 class="text-center">Signup to SmartSociety</h2>
         <form action="signup.php" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="name">Name</label>

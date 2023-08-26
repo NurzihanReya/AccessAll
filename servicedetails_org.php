@@ -18,7 +18,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <title>AccessAll - Service Details</title>
+    <title>SmartSociety - Service Details</title>
     <style>
     body {
         background-color: #f8f9fa;
@@ -95,27 +95,30 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
                     $service_id = $_GET['sid'];
 
      
-                    $sql = "SELECT services.*, organizations.name AS organization_name, organizations.phone_number, organizations.address, organizations.city FROM services
-                            JOIN organizations ON services.o_id = organizations.o_id
-                            WHERE services.s_id = '$service_id'";
+                    // $sql2 = "SELECT services.*, organizations.name AS organization_name, organizations.phone_number, organizations.address, organizations.city FROM services
+                    //         JOIN organizations ON services.o_id = organizations.o_id
+                    //         WHERE services.s_id = '$service_id'";
+                    $sql = "SELECT * FROM organizations WHERE o_id = '$service_id'";
                     $result = mysqli_query($conn, $sql);
 
                     if ($result) {
                         if (mysqli_num_rows($result) > 0) {
                             $row = mysqli_fetch_assoc($result);
-                            $service_name = $row['service_name'];
+                            $organization_name = $row['name'];
+                            
+                            $service_name = $row['service_type'];
                             $description = $row['description'];
                             $image_url = $row['image_url'];
-                            $organization_name = $row['organization_name'];
+                            
                             $phone_number = $row['phone_number'];
                             $address = $row['address'];
                             $city = $row['city'];
 
                 
                             echo '<div class="card mb-4">';
-                            echo '<img src="' . $image_url . '" class="card-img-top" alt="' . $service_name . ' Image">';
+                            echo '<img src="' . $image_url . '" class="card-img-top" alt="' . $organization_name . ' Image">';
                             echo '<div class="card-body">';
-                            echo '<h2 class="card-title">' . $service_name . '</h2>';
+                            echo '<h2 class="card-title">' . $organization_name . '</h2>';
                             echo '<p class="card-text">' . $description . '</p>';
                             echo '</div>';
                             echo '</div>';

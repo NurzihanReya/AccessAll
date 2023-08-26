@@ -9,6 +9,6 @@ $sql = "UPDATE `organizations` SET `status` = -1 WHERE `o_id` = $id";
 
 <?php
 echo("<script LANGUAGE='JavaScript'>
-        window.alert('Post has been rejected successfully!'); window.location.href = 'http://localhost/accessall/adminhome.php';
+        window.alert('Post has been rejected successfully!'); window.location.href = 'http://localhost/SmartSociety/adminhome.php';
 </script>");
 ?>

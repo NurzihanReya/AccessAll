@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$db = 'accessall';
+$db = 'SmartSociety';
 $user = 'root';
 $password = '';
 

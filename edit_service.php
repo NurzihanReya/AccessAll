@@ -18,12 +18,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $phone_number = $_POST["inputZip"];
     // $service_type = $_POST["inputServiceType"];
     $payment_method = $_POST["inputPaymentMethod"];
-    // $transaction_number = $_POST["transaction"];
+    $transaction_number = $_POST["transaction"];
     // $user_id = $_SESSION['sno'];
 
     $sql = "UPDATE organizations 
     SET address='$address',city='$city',
-    phone_number='$phone_number',payment_method='$payment_method', 
+    phone_number='$phone_number',payment_method='$payment_method', transaction_number='$transaction_number'
     WHERE name='$username'";
 
     if (mysqli_query($conn, $sql)) {
@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <title>AccessAll</title>
+    <title>SmartSociety</title>
     <style>
     body {
         background-color: #f8f9fa;
@@ -173,10 +173,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <option value='rocket'>Rocket</option>
                     </select>
                 </div>
-                <!-- <div class="form-group col-md-6">
+                <div class="form-group col-md-6">
                     <label for="transaction">Transaction Number</label>
                     <input type="text" class="form-control" id="transaction" name="transaction">
-                </div> -->
+                </div>
             </div>
             <div class="form-group">
                 <div class="form-check">

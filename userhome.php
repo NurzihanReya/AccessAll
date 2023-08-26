@@ -22,7 +22,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <title>AccessAll</title>
+    <title>SmartSociety</title>
 </head>
 
 
@@ -32,23 +32,32 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
 
 
     <div class="container mt-5">
-        <h3>Browse Categories:</h3>
+        <div class="d-flex justify-content-between mb-3">
+            <h3>Available Services:</h3>
+            <?php
+            $org_id = $_SESSION['sno'];
+            // echo '<a href="view_appointments.php?org_id=' . $org_id . '" class="btn btn-primary">View All Appointments</a>';
+            ?>
+        </div>
+
+
         <div class="row">
             <?php
-            $sql = "SELECT services.*, organizations.name AS organization_name, organizations.status AS status FROM services
-                    JOIN organizations ON services.o_id = organizations.o_id";
+            $org_id = $_SESSION['sno'];
+            $sql = "SELECT * FROM organizations where status = 1";
             $result = mysqli_query($conn, $sql);
             $noResult = true;
 
 
-            while ($row = mysqli_fetch_assoc($result)) {
-                if($row['status'] == 1)
-                {
-                    $noResult = false;
-                    $service_id = $row['s_id'];
-                    $service_name = $row['service_name'];
+            if ($result) {
+                $count = 0;
+
+
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $service_id = $row['o_id'];
+                    $org_name = $row['name'];
+                    $service_name = $row['service_type'];
                     $description = $row['description'];
-                    $organization_name = $row['organization_name'];
                     $image_url = $row['image_url'];
 
 
@@ -60,27 +69,36 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
                         <div class="card h-100 shadow">
                             <img src="' . $image_url . '" class="card-img-top" alt="' . $service_name . ' Image" style="max-height: 200px; object-fit: cover;">
                             <div class="card-body">
-                                <h5 class="card-title">' . $organization_name . '</h5>
-                                <p class="card-text"><span class="text-primary">' . $service_name . '</span></p>
+                                <h5 class="card-title">' . $org_name . '</h5>
                                 <p class="card-text">' . $truncated_description . '... <a href="servicedetails_user.php?sid=' . $service_id . '">Read More</a></p>
-                                <a href="servicedetails_user.php?sid=' . $service_id . '" class="btn btn-primary btn-block">View Organization</a>
+                                <a href="servicedetails_user.php?sid=' . $service_id . '" class="btn btn-dark btn-block">View Organization</a>
                             </div>
                         </div>
                     </div>';
-            }
+
+
+                    $count++;
+
+
+                    if ($count % 3 === 0) {
+                        echo '</div><div class="row">';
+                    }
+
+
+                    $noResult = false;
                 }
-
-
-            if ($noResult) {
-                echo '
-                <div class="jumbotron">
-                    <h1 class="display-4">No services available</h1>
-                    <p class="lead">There are currently no services to display.</p>
-                </div>';
             }
 
 
             mysqli_close($conn);
+
+
+            if ($noResult) {
+                echo '
+                <div class="jumbotron" style="width: 100%; height: 40%;">
+               
+                </div>';
+            }
             ?>
         </div>
     </div>

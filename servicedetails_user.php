@@ -18,7 +18,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <title>AccessAll - Service Details</title>
+    <title>SmartSociety - Service Details</title>
     <style>
     body {
         background-color: #f8f9fa;
@@ -141,6 +141,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
                         <p><span class="form-label">Phone Number:</span> <?php echo $phone_number; ?></p>
                         <p><span class="form-label">Address:</span> <?php echo $address; ?></p>
                         <p><span class="form-label">City:</span> <?php echo $city; ?></p>
+                        <form action="reportmiddleman.php" method="POST">
+                            <button name="sosreport" value="fire;<?php echo $service_id;?>">Fire</button>
+                            <button name="sosreport" value="crime;<?php echo $service_id;?>">Crime</button>
+                            <button name="sosreport" value="accident;<?php echo $service_id;?>">Accident</button>
+                        </form>
                     </div>
                 </div>
                 <div class="card mt-3">

@@ -51,7 +51,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <title>AccessAll - Log In</title>
+    <title>SmartSociety - Log In</title>
 
 </head>
 
@@ -76,7 +76,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     ?>
     <div class="container my-4 mx-7">
-        <h2 class="text-center">Login to AccessAll</h2>
+        <h2 class="text-center">Login to SmartSociety</h2>
         <form action="index.php" method="post">
             <div class="form-group">
                 <label for="useremail">Email</label>

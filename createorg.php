@@ -17,23 +17,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $service_type = $_POST["inputServiceType"];
     $payment_method = $_POST["inputPaymentMethod"];
     $transaction_number = $_POST["transaction"];
+    $description = $_POST["description"];
+    $mediaUrl = "";
+
+    // Check if a file was uploaded
+    if (isset($_FILES["media"]) && $_FILES["media"]["error"] === 0) {
+        $targetDir = "uploads/";
+        $mediaUrl = $targetDir . basename($_FILES["media"]["name"]);
+
+        // Move the uploaded file to the target directory
+        if (move_uploaded_file($_FILES["media"]["tmp_name"], $mediaUrl)) {
+            // File uploaded successfully
+        } else {
+            echo "Error uploading file.";
+        }
+    }
+
     $user_id = $_SESSION['sno'];
 
-    $sql = "INSERT INTO organizations (name, bin, address, city, phone_number, service_type, payment_method, transaction_number, user_id, status) 
-            VALUES ('$name', '$bin', '$address', '$city', '$phone_number', '$service_type', '$payment_method', '$transaction_number', '$user_id', 0)"; //insert into service table
+    $sql = "INSERT INTO organizations (name, bin, address, city, phone_number, service_type, payment_method, transaction_number, user_id, status, description, image_url) 
+            VALUES ('$name', '$bin', '$address', '$city', '$phone_number', '$service_type', '$payment_method', '$transaction_number', '$user_id', 0, '$description', '$mediaUrl')";
+
     $result = mysqli_query($conn, $sql);
     $showAlert = true;
-    if($showAlert){
+
+    if ($showAlert) {
         echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     <strong>Success!</strong> Your service request has been successful! Please wait for admin to approve.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
             </div>';
-        } else {
-            echo "Error: " . mysqli_error($conn);
-        }
+    } else {
+        echo "Error: " . mysqli_error($conn);
+    }
 }
+
 ?>
 
 <!doctype html>
@@ -51,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 
-    <title>AccessAll</title>
+    <title>SmartSociety</title>
 </head>
 
 
@@ -64,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="container my-4">
 
-        <form method="post">
+        <form method="POST" enctype="multipart/form-data">
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="name">Name of the Service</label>
@@ -113,6 +132,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label for="transaction">Transaction Number</label>
                     <input type="text" class="form-control" id="transaction" name="transaction">
                 </div>
+                <div class="form-group col-md-6">
+                    <label for="description">Description</label>
+                    <input type="textarea" class="form-control" id="description" name="description">
+                </div>
             </div>
             <div class="form-group">
                 <div class="form-check">
@@ -121,6 +144,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         I agree to the terms and conditions
                     </label>
                 </div>
+            </div>
+            <div class="form-group">
+                <label for="media">Upload Media (if applicable)</label>
+                <input type="file" name="media" class="form-control-file">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
