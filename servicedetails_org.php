@@ -94,7 +94,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
                 if (isset($_GET['sid'])) {
                     $service_id = $_GET['sid'];
 
-                    // Fetch service and organization details
+     
                     $sql = "SELECT services.*, organizations.name AS organization_name, organizations.phone_number, organizations.address, organizations.city FROM services
                             JOIN organizations ON services.o_id = organizations.o_id
                             WHERE services.s_id = '$service_id'";
@@ -111,7 +111,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
                             $address = $row['address'];
                             $city = $row['city'];
 
-                            // Display service details
+                
                             echo '<div class="card mb-4">';
                             echo '<img src="' . $image_url . '" class="card-img-top" alt="' . $service_name . ' Image">';
                             echo '<div class="card-body">';
@@ -134,7 +134,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
             </div>
             <div class="col-md-4">
                 <div class="card mb-4">
-                    <div class="card-header">Organization Details</div>
+                    <div class="card-header">Services Details</div>
                     <div class="card-body">
                         <p><span class="form-label">Organization Name:</span> <?php echo $organization_name; ?></p>
                         <p><span class="form-label">Phone Number:</span> <?php echo $phone_number; ?></p>
@@ -142,6 +142,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
                         <p><span class="form-label">City:</span> <?php echo $city; ?></p>
                     </div>
                 </div>
+
+                <!-- mysun -->
+                <!-- <form action="deleteservice.php" method="post">
+                    <input type="hidden" name="service_id" value="<?php echo $service_id; ?>">
+                    <button type="submit" class="btn btn-danger">Delete Service</button>
+                </form> -->
                 <!-- <div class="card mt-3">
                     <div class="card-header">Take an Appointment</div>
                     <div class="card-body">

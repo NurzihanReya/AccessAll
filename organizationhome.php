@@ -29,7 +29,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
     <div class="container mt-5">
 
         <div class="d-flex justify-content-between mb-3">
-            <h3>Your Organizations:</h3>
+            <h3>Your Services:</h3>
             <?php
             $org_id = $_SESSION['sno'];
             echo '<a href="view_appointments.php?org_id=' . $org_id . '" class="btn btn-primary">View All Appointments</a>

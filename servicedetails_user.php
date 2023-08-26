@@ -135,7 +135,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
             </div>
             <div class="col-md-4">
                 <div class="card mb-4">
-                    <div class="card-header">Organization Details</div>
+                    <div class="card-header">Services Details</div>
                     <div class="card-body">
                         <p><span class="form-label">Organization Name:</span> <?php echo $organization_name; ?></p>
                         <p><span class="form-label">Phone Number:</span> <?php echo $phone_number; ?></p>
@@ -188,14 +188,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
                             <button type="submit" class="btn btn-primary btn-block">Book Appointment</button><br />
                         </form>
                         <?php if($service_name=='Police Station'){ ?>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-block">EMERGENCY DIRECT CONTACT</button>
-                        </div>
+                        </div> -->
                         <?php }?>
                         <?php if($service_name=='Fire Service'){ ?>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-block">EMERGENCY DIRECT CONTACT</button>
-                        </div>
+                        </div> -->
                         <?php }?>
                     </div>
                 </div>

@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_id = $_SESSION['sno'];
 
     $sql = "INSERT INTO organizations (name, bin, address, city, phone_number, service_type, payment_method, transaction_number, user_id, status) 
-            VALUES ('$name', '$bin', '$address', '$city', '$phone_number', '$service_type', '$payment_method', '$transaction_number', '$user_id', 0)";
+            VALUES ('$name', '$bin', '$address', '$city', '$phone_number', '$service_type', '$payment_method', '$transaction_number', '$user_id', 0)"; //insert into service table
     $result = mysqli_query($conn, $sql);
     $showAlert = true;
     if($showAlert){
