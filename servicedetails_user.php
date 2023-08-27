@@ -194,14 +194,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
                             <button type="submit" class="btn btn-primary btn-block">Book Appointment</button><br />
                         </form>
                         <?php if($service_name=='Police Station'){ ?>
-                        <!-- <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block">EMERGENCY DIRECT CONTACT</button>
-                        </div> -->
                         <?php }?>
                         <?php if($service_name=='Fire Service'){ ?>
-                        <!-- <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block">EMERGENCY DIRECT CONTACT</button>
-                        </div> -->
 
                         
                         <?php }?>
