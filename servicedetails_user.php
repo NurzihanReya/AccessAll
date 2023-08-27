@@ -203,6 +203,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
                             <button type="submit" class="btn btn-primary btn-block">EMERGENCY DIRECT CONTACT</button>
                         </div> -->
                         <!-- html add -->
+
+                        <!-- html delete -->
                         <?php }?>
                     </div>
                 </div>
