@@ -48,6 +48,7 @@ if (isset($_POST['sosreport'])) {
         if (!$result) {
             echo "Error inserting report: " . mysqli_error($conn);
             exit();
+            //$resultsall;
         }
 
 

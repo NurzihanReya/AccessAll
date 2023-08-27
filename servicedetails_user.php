@@ -202,6 +202,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
                         <!-- <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-block">EMERGENCY DIRECT CONTACT</button>
                         </div> -->
+                        <!-- html add -->
                         <?php }?>
                     </div>
                 </div>
