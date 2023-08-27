@@ -138,6 +138,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
                     <div class="card-header">Services Details</div>
                     <div class="card-body">
                         <p><span class="form-label">Organization Name:</span> <?php echo $organization_name; ?></p>
+                        <!-- <p><span class="form-label">Organization Name:</span></p> -->
                         <p><span class="form-label">Phone Number:</span> <?php echo $phone_number; ?></p>
                         <p><span class="form-label">Address:</span> <?php echo $address; ?></p>
                         <p><span class="form-label">City:</span> <?php echo $city; ?></p>
