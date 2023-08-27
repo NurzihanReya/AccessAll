@@ -204,7 +204,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
                         </div> -->
                         <!-- html add -->
 
-                        <!-- html delete -->
+                        
                         <?php }?>
                     </div>
                 </div>
